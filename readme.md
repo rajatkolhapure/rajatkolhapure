@@ -2,21 +2,21 @@
 
 Developer based in Pune, India.
 
-I build software primarily to understand how things work underneath the hood. Most projects here started because I ran into a tool that felt limited, bloated, or paywalled, and thought: *"why doesn't this exist the way I actually want it to?"*
+I build software to understand how things work underneath all the ui. Most projects started because I ran into the tool that felt limited or paywalled and thought: *"why is this the way it is?"*
 
-I prefer working implementations over abstract architectures, and complete systems over isolated demos. Still learning, experimenting, and regularly breaking things to see why they worked in the first place.
+I prefer working implementations over complexity in the design, and complete systems over isolated demos. Still learning, experimenting, and regularly breaking things to see why they worked in the first place.
 
 ---
 
 ### Systems & Projects
 
 #### [CBT Core](https://github.com/rajatkolhapure/cbt-core) + [NTA LaTeX Extractor](https://github.com/rajatkolhapure/nta-latex-extractor)
-*An end-to-end examination platform paired with an automated question paper digitization pipeline.*
+*An end-to-end test platform paired with an automated question paper digitization.*
 
-Standard computer-based testing software often feels clumsy, rigid, and tedious to populate with complex questions. I built this two-part ecosystem to tackle both sides of the problem: running secure, responsive exams, and transforming messy real-world examination papers into clean, machine-readable datasets.
+Standard computer-based testing software often feels old and rigid to populate with complex questions. I built this two-part ecosystem to tackle both sides of the problem: running secure, responsive exams, and transforming messy examination papers into clean, machine readable data.
 
-- **CBT Core**: Built with TypeScript and Node.js with a distinctive technical journal interface. Handles high-concurrency exam delivery, state persistence across network drops, and automated integrity tracking (window blur detection, tab switching, and proctoring events).
-- **NTA LaTeX Extractor**: A Python and computer vision pipeline designed to ingest thousands of scanned JEE, NEET, and MHT-CET exam papers. Rather than relying on naive OCR that mangles formulas and diagrams, it pairs multimodal vision models with OpenCV ink-projection heuristics to cleanly extract mathematical expressions into LaTeX, format tables into semantic markup, and isolate diagrams with sub-pixel Lanczos4 anti-aliased cropping.
+- **CBT Core**: Built with TypeScript and Node.js with a distinctive interface. Handles high concurrency exam delivery, stays persistence across network drops, and automated cheat detection.
+- **NTA LaTeX Extractor**: A Python and computer vision pipeline designed to take in thousands of scanned JEE, NEET, and MHT-CET exam papers. Rather than relying on naive OCR that mangles formulas and diagrams, it pairs multimodal vision models with OpenCV ink-projection strat to cleanly extract mathematical expressions into LaTeX, format tables into semantic markup, and isolate diagrams with sub-pixel Lanczos4 anti-aliased cropping.
 
 <details>
 <summary>Technical breakdown & pipeline details</summary>
@@ -24,16 +24,16 @@ Standard computer-based testing software often feels clumsy, rigid, and tedious 
 ```
 Raw Scanned PDF / Image
        │
-       ├── Computer Vision Preprocessing (OpenCV)
+       ├── Computer Vision Preprocessing
        │     ├── Ink projection profiling & column segmentation
        │     └── Deterministic diagram boundary isolation
        │
        ├── Dual Vision Inference Engine
        │     ├── Cloud: Multimodal LLM with automated retry & fallback
-       │     └── Offline: Local GPU inference (Qwen2.5-VL via Ollama)
+       │     └── Offline: Local GPU inference (Qwen2.5-VL)
        │
        ├── Normalization & Asset Export
-       │     ├── Sub-pixel diagram upscaling (Lanczos4 + thresholding)
+       │     ├── Sub-pixel diagram upscaling 
        │     ├── LaTeX mathematical expression validation
        │     └── Dynamic subject classification (Physics / Chemistry / Math)
        │
@@ -42,18 +42,18 @@ Raw Scanned PDF / Image
              └── Direct schema push into CBT Core PostgreSQL database
 ```
 
-**Status:** The extraction pipeline has processed thousands of real-world national entrance exam questions into structured JSON. CBT Core has an end-to-end working exam engine with live proctoring event dispatchers and a local verification suite.
+**Status:** The extraction pipeline has processed thousands of real-world national entrance exam questions into structured JSON. CBT Core has an end-to-end working exam engine with live proctoring event dispatchers and a local verification suite, although it is not 100% accurate it still messes up some questions which are too complicated for it.
 </details>
 
 ---
 
 #### [Tele-Lens](https://github.com/rajatkolhapure/Tele-Lens)
-*Watermark-free smartphone-to-desktop webcam pipeline over WebRTC.*
+*Watermark-free phone to desktop webcam over WebRTC.*
 
-Built-in laptop cameras are notoriously grainy, while commercial phone-as-webcam apps tend to slap watermarks over video, throttle resolution behind monthly subscriptions, or run proprietary black-box drivers. I wanted an open alternative that treats your phone camera like a proper hardware sensor without artificial restrictions.
+Built-in laptop cameras are notoriously shit, while commercial phone as webcam apps tend to slap watermarks over video, throttle resolution behind monthly subscriptions, or run proprietary blackbox drivers. I wanted an open alternative that treats your phone camera like a proper hardware sensor without artificial restrictions.
 
 - **Mobile Client (Flutter / Dart)**: Interacts directly with Camera2 and AVFoundation to expose manual lens switching (standard, ultrawide, telephoto), exposure locks, ISO adjustments, manual focus, and a thermal-saver background mode.
-- **Desktop Receiver (Python / PyQt6)**: A low-latency receiving hub that accepts incoming feeds over local Wi-Fi (mDNS / Bonjour auto-discovery) or wired USB (automated ADB port forwarding).
+- **Desktop Receiver (Python / PyQt6)**: A low latency receiving hub that accepts incoming feeds over local Wi-Fi (mDNS / Bonjour auto-discovery) or wired USB (automated ADB port forwarding).
 - **Virtual Hardware Integration**: Feeds raw incoming video frames into DirectShow and OBS Virtual Camera backends via `pyvirtualcam`, making the phone appear as a native hardware webcam in Zoom, Google Meet, Teams, and Discord.
 
 <details>
