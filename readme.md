@@ -11,7 +11,7 @@ I prefer working implementations over complexity in the design, and complete sys
 ### Systems & Projects
 
 #### [CBT Core](https://github.com/rajatkolhapure/cbt-core) + [NTA LaTeX Extractor](https://github.com/rajatkolhapure/nta-latex-extractor)
-*An end-to-end test platform paired with an automated question paper digitization.*
+*An test platform paired with an automated question paper digitization.*
 
 Standard computer-based testing software often feels old and rigid to populate with complex questions. I built this two-part ecosystem to tackle both sides of the problem: running secure, responsive exams, and transforming messy examination papers into clean, machine readable data.
 
@@ -42,7 +42,7 @@ Raw Scanned PDF / Image
              └── Direct schema push into CBT Core PostgreSQL database
 ```
 
-**Status:** The extraction pipeline has processed thousands of real-world national entrance exam questions into structured JSON. CBT Core has an end-to-end working exam engine with live proctoring event dispatchers and a local verification suite, although it is not 100% accurate it still messes up some questions which are too complicated for it.
+**Status:** The extraction pipeline has processed thousands of realworld national entrance exam questions into structured JSON. CBT Core has an end-to-end working exam engine with live proctoring event dispatchers and a local verification suite, although it is not 100% accurate it still messes up some questions which are too complicated for it.
 </details>
 
 ---
@@ -50,7 +50,7 @@ Raw Scanned PDF / Image
 #### [Tele-Lens](https://github.com/rajatkolhapure/Tele-Lens)
 *Watermark-free phone to desktop webcam over WebRTC.*
 
-Built-in laptop cameras are notoriously shit, while commercial phone as webcam apps tend to slap watermarks over video, throttle resolution behind monthly subscriptions, or run proprietary blackbox drivers. I wanted an open alternative that treats your phone camera like a proper hardware sensor without artificial restrictions.
+Built-in laptop cameras are notoriously shit, while commercial phone as webcam apps tend to slap ugly watermarks over video, throttle resolution behind monthly subscriptions, or run proprietary blackbox drivers. I wanted an open alternative that treats your phone camera like a proper hardware sensor without artificial restrictions.
 
 - **Mobile Client (Flutter / Dart)**: Interacts directly with Camera2 and AVFoundation to expose manual lens switching (standard, ultrawide, telephoto), exposure locks, ISO adjustments, manual focus, and a thermal-saver background mode.
 - **Desktop Receiver (Python / PyQt6)**: A low latency receiving hub that accepts incoming feeds over local Wi-Fi (mDNS / Bonjour auto-discovery) or wired USB (automated ADB port forwarding).
@@ -82,9 +82,9 @@ Built-in laptop cameras are notoriously shit, while commercial phone as webcam a
 ---
 
 #### [Evolutionary Chess Engine](https://github.com/rajatkolhapure/chess)
-*A step-by-step experiment in understanding game-tree search and machine evaluation from first principles.*
+*A step-by-step experiment in understanding gametree search and machine evaluation from first principles.*
 
-Instead of importing an existing engine or jumping straight into neural networks, I wanted to explore how machine chess thought evolved historically—starting from a pure greedy piece-counter and systematically building up search depth and tactical awareness.
+Instead of importing an existing engine or jumping straight into neural networks, I wanted to explore how machine chess thought evolved historically, starting from a pure greedy piece counter and systematically building up search depth and tactical awareness.
 
 - **Level 1 (Greedy)**: Material counting with basic PeSTO piece-square tables and game-phase tapering.
 - **Level 2 (Minimax)**: Zero-sum game tree search with 3-ply lookahead.
@@ -107,7 +107,7 @@ The engine implements a classical Stockfish-inspired positional evaluator:
 
 ### What I'm exploring lately
 
-- Multimodal document processing and heuristic computer vision pipelines.
+- Multimodal document processing and heuristic computer vision.
 - Virtual device drivers, audio loopbacks, and low-latency WebRTC data channels.
 - Combinatorial search optimizations and adversarial game tree pruning.
 
