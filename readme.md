@@ -2,9 +2,8 @@
 
 Developer based in Pune, India.
 
-I build software to understand how things work underneath all the ui. Most projects started because I ran into the tool that felt limited or paywalled and thought: *"why is this the way it is?"*
+I build software to understand how things work underneath all the ui. Most projects started because I ran into the tool that felt limited or paywalled and thought: *"why is this the way it is?"*, still learning.
 
-I prefer working implementations over complexity in the design, and complete systems over isolated demos. Still learning, experimenting, and regularly breaking things to see why they worked in the first place.
 
 ---
 
@@ -20,7 +19,8 @@ Standard computer-based testing software often feels old and rigid to populate w
 
 <details>
 <summary>Technical breakdown & pipeline details</summary>
-
+- **CBT Core**: Built with TypeScript and Node.js with a distinctive interface. Handles high concurrency exam delivery, stays persistence across network drops, and automated cheat detection.
+- **NTA LaTeX Extractor**: A Python and computer vision pipeline designed to take in thousands of scanned JEE, NEET, and MHT-CET exam papers. Rather than relying on naive OCR that mangles formulas and diagrams, it pairs multimodal vision models with OpenCV ink-projection strat to cleanly extract mathematical expressions into LaTeX, format tables into semantic markup, and isolate diagrams with sub-pixel Lanczos4 anti-aliased cropping.
 ```
 Raw Scanned PDF / Image
        │
