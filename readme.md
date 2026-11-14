@@ -14,14 +14,13 @@ I build software to understand how things work underneath all the ui. Most proje
 
 Standard computer-based testing software often feels old and rigid to populate with complex questions. I built this two-part ecosystem to tackle both sides of the problem: running secure, responsive exams, and transforming messy examination papers into clean, machine readable data.
 
+<details>
+<summary>Technical breakdown & pipeline details</summary>
+       
 - **CBT Core**: Built with TypeScript and Node.js with a distinctive interface. Handles high concurrency exam delivery, stays persistence across network drops, and automated cheat detection.
 - **NTA LaTeX Extractor**: A Python and computer vision pipeline designed to take in thousands of scanned JEE, NEET, and MHT-CET exam papers. Rather than relying on naive OCR that mangles formulas and diagrams, it pairs multimodal vision models with OpenCV ink-projection strat to cleanly extract mathematical expressions into LaTeX, format tables into semantic markup, and isolate diagrams with sub-pixel Lanczos4 anti-aliased cropping.
 
-<details>
-<summary>Technical breakdown & pipeline details</summary>
-- **CBT Core**: Built with TypeScript and Node.js with a distinctive interface. Handles high concurrency exam delivery, stays persistence across network drops, and automated cheat detection.
-- **NTA LaTeX Extractor**: A Python and computer vision pipeline designed to take in thousands of scanned JEE, NEET, and MHT-CET exam papers. Rather than relying on naive OCR that mangles formulas and diagrams, it pairs multimodal vision models with OpenCV ink-projection strat to cleanly extract mathematical expressions into LaTeX, format tables into semantic markup, and isolate diagrams with sub-pixel Lanczos4 anti-aliased cropping.
-```
+ ```
 Raw Scanned PDF / Image
        │
        ├── Computer Vision Preprocessing
@@ -40,6 +39,7 @@ Raw Scanned PDF / Image
        └── Verification & Ingestion
              ├── Rapid side-by-side keyboard-driven human review tool
              └── Direct schema push into CBT Core PostgreSQL database
+
 ```
 
 **Status:** The extraction pipeline has processed thousands of realworld national entrance exam questions into structured JSON. CBT Core has an end-to-end working exam engine with live proctoring event dispatchers and a local verification suite, although it is not 100% accurate it still messes up some questions which are too complicated for it.
@@ -52,12 +52,12 @@ Raw Scanned PDF / Image
 
 Built-in laptop cameras are notoriously shit, while commercial phone as webcam apps tend to slap ugly watermarks over video, throttle resolution behind monthly subscriptions, or run proprietary blackbox drivers. I wanted an open alternative that treats your phone camera like a proper hardware sensor without artificial restrictions.
 
+<details>
+<summary>Technical breakdown & driver bridge</summary>
+       
 - **Mobile Client (Flutter / Dart)**: Interacts directly with Camera2 and AVFoundation to expose manual lens switching (standard, ultrawide, telephoto), exposure locks, ISO adjustments, manual focus, and a thermal-saver background mode.
 - **Desktop Receiver (Python / PyQt6)**: A low latency receiving hub that accepts incoming feeds over local Wi-Fi (mDNS / Bonjour auto-discovery) or wired USB (automated ADB port forwarding).
 - **Virtual Hardware Integration**: Feeds raw incoming video frames into DirectShow and OBS Virtual Camera backends via `pyvirtualcam`, making the phone appear as a native hardware webcam in Zoom, Google Meet, Teams, and Discord.
-
-<details>
-<summary>Technical breakdown & driver bridge</summary>
 
 ```
 [ Smartphone: Flutter ]
@@ -84,15 +84,15 @@ Built-in laptop cameras are notoriously shit, while commercial phone as webcam a
 #### [Evolutionary Chess Engine](https://github.com/rajatkolhapure/chess)
 *A step-by-step experiment in understanding gametree search and machine evaluation from first principles.*
 
+<details>
+<summary>Evaluation details & search benchmarks</summary>
+
 Instead of importing an existing engine or jumping straight into neural networks, I wanted to explore how machine chess thought evolved historically, starting from a pure greedy piece counter and systematically building up search depth and tactical awareness.
 
 - **Level 1 (Greedy)**: Material counting with basic PeSTO piece-square tables and game-phase tapering.
 - **Level 2 (Minimax)**: Zero-sum game tree search with 3-ply lookahead.
 - **Level 3 (Tactician)**: Alpha-Beta pruning, MVV-LVA (Most Valuable Victim - Least Valuable Attacker) move ordering, and Quiescence search to eliminate the horizon effect during mid-trade captures.
 - **Level 4 (Deep Searcher)**: Zobrist hashing for 64-bit board transposition tables, Null-Move Pruning (NMP) for early branch cutoffs, and iterative deepening with fail-safe rollback state protection.
-
-<details>
-<summary>Evaluation details & search benchmarks</summary>
 
 The engine implements a classical Stockfish-inspired positional evaluator:
 - Tapered phase scoring between opening and endgame.
@@ -105,19 +105,11 @@ The engine implements a classical Stockfish-inspired positional evaluator:
 
 ---
 
-### What I'm exploring lately
-
-- Multimodal document processing and heuristic computer vision.
-- Virtual device drivers, audio loopbacks, and low-latency WebRTC data channels.
-- Combinatorial search optimizations and adversarial game tree pruning.
-
----
-
 ### How I build
 
-1. **Understand before abstracting**: I prefer tracing the raw protocol packets, byte arrays, or API calls before reaching for a high-level wrapper.
-2. **Built to solve an actual annoyance**: If a tool already does what I need cleanly and without arbitrary limitations, I don't rebuild it. If it doesn't, I treat the gap as an excuse to learn how that class of software works.
-3. **Tendency to overengineer**: A simple weekend script has a habit of growing into a full pipeline with diagnostic dashboards, stateful resumption, and custom test harnesses.
+1. **Understand before abstracting**: I start with raw data to understand it before using wrappers.
+2. **Built to solve an actual annoyance**: fill gaps only when necessary; otherwise, rely on existing tools to do the job.
+3. **Tendency to overengineer**: A simple weekend script has a habit of growing into a complex project
 
 ---
 
